@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestration Learning"
+  short_description: "Record and learn from agent routing outcomes"
+  default_prompt: "Use $delegate-learn to record and review this delegation or advisor outcome."
