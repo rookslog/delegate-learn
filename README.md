@@ -14,3 +14,19 @@ discipline as delegate-runtime's installer.
 Family: delegate-ops (product) · delegate-policy (routing policy + delegate-triage skill) ·
 delegate-runtime (adapters, intent-writer, capture) · delegate-learn (this repo).
 Naming ratified 2026-08-14 (delegate-policy `docs/proposals/2026-08-14-family-naming.md`).
+
+## Offline checks
+
+Run the existing stdlib-only CLI regression suite from this repository:
+
+```sh
+python3 -B -m unittest discover -s skill/tests -v
+```
+
+The tests create synthetic events under explicit temporary homes; they do not
+read or write the installed skill's telemetry store, submit work to a provider,
+or install the skill. The [CI workflow](.github/workflows/ci.yml) runs this same
+suite with Python 3.12 on pull requests and pushes to `main`, using pinned actions,
+read-only repository access and no persisted checkout credential. This public
+repository uses GitHub-hosted `ubuntu-latest` only, never a self-hosted runner or
+the private-repository `CI_RUNNER` override. Branch protection is not changed.
